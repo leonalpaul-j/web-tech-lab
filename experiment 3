@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Coffee Haven</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+body{
+background:#d5c8c8;
+}
+header{
+text-align:center;
+padding-bottom:30px;
+}
+nav{
+background:rgba(0,0,0,.6);
+padding:15px;
+}
+nav a{
+color:white;
+text-decoration:none;
+margin:20px;
+font-size:18px;
+}
+nav a:hover{
+color:gold;
+}
+h1{
+font-size:50px;
+padding-top:60px;
+text-shadow:2px 2px 5px black;
+}
+button{
+padding:12px 25px;
+background:#6f4e37;
+color:white;
+border:none;
+border-radius:5px;
+margin-top:20px;
+cursor:pointer;
+}
+button:hover{
+background:#c58b4e;
+}
+header img{
+width:85%;
+height:220px;
+margin-top:25px;
+border-radius:10px;
+}
+padding:40px;
+section{
+text-align:center;
+}
+article{
+display:inline-block;
+width:220px;
+background:white;
+margin:15px;
+padding:10px;
+border-radius:10px;
+box-shadow:0 0 8px gray;
+}
+article img{
+width:100%;
+height:150px;
+border-radius:8px;
+}
+h2{
+color:#6f4e37;
+margin-bottom:20px;
+}
+footer{
+background:#3e2723;
+color:white;
+padding:20px;
+text-align:center;
+}
+@media(max-width:700px){
+article{
+display:block;
+margin:20px auto;
+}
+h1{
+font-size:35px;
+}
+nav a{
+display:block;
+margin:10px;
+}
+header img{
+width:95%;
+height:170px;
+}
+}
+</style>
+</head>
+<body>
+<header>
+<nav>
+<a href="https://havencoffee.in/">Home</a>
+<a href="https://en.wikipedia.org/wiki/Coffeeheaven">About</a>
+<a href="https://www.coffeehavennc.com/menu">Menu</a>
+<a href="https://coffeeheaven.in/contact/">Contact</a>
+</nav>
+<h1>☕ Coffee Haven</h1>
+<p style="margin-top:20px;font-size:20px;">
+Fresh Coffee, Fresh Moments
+</p>
+<button>Order Now</button>
+<br><br>
+<img src="D:\downloads\conter image coffee.jpg">
+</header>
+<section>
+<h2>About Us</h2>
+<p>
+Coffee Haven serves freshly brewed coffee made from premium beans.
+Relax with your friends while enjoying delicious coffee and desserts
+in a peaceful atmosphere.
+</p>
+</section>
+<section>
+<h2>Our Menu</h2>
+<article>
+<img src="D:\downloads\espresso.jpg">
+<h3>Espresso</h3>
+<p>Rich & Strong Coffee</p>
+</article>
+<article>
+<img src="D:\downloads\cap.jpeg">
+<h3>Cappuccino</h3>
+<p>Creamy Milk Foam</p>
+</article>
+<article>
+<img src="D:\downloads\cafe bu.jpg">
+<h3>Café Bustelo</h3>
+<p>ark-roast espresso</p>
+</article>
+<article>
+<img src="D:\downloads\americano.jpeg">
+<h3>Americano</h3>
+<p>soft coffee</p>
+</article>
+<article>
+<img src="D:\downloads\latte.jpg">
+<h3>Latte</h3>
+<p>Smooth Coffee Taste</p>
+</article>
+</section>
+<section>
+<h2>Why Choose Us?</h2>
+<p>☕ Premium Coffee Beans</p>
+<p>🍰 Fresh Cakes</p>
+<p>📶 Free Wi-Fi</p>
+<p>😊 Friendly Staff</p>
+</section>
+<section>
+<h2>Customer Reviews</h2>
+<p>⭐⭐⭐⭐⭐ "Excellent coffee and wonderful ambience."</p>
+<br>
+<p>⭐⭐⭐⭐⭐ "Best place to relax with friends."</p>
+</section>
+<section>
+<h2>Contact Us</h2>
+<p>📍 Coffee Haven, Coimbatore</p>
+<p>📞 +91 98765 43210</p>
+<p>✉ coffeehaven@gmail.com</p>
+</section>
+<footer>
+<h3>Coffee Haven ☕</h3>
+<p>URK24CS1152</p>
+</footer>
+</body>
+</html>
