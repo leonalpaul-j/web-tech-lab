@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Freelancer Service Hub</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #ffffff;
+            color: #a10f5d;
+        }
+        /* Premium header with gradient and background */
+        header {
+            text-align: center;
+            padding: 55px 20px;
+            color: white;
+            background:
+                linear-gradient(135deg, #a7042a, #1049c5);
+            border-radius: 0 0 35px 35px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 40px;
+            letter-spacing: 1px;
+            text-shadow: 2px 3px 8px #0c0c0c;
+        }
+        header p {
+            font-size: 17px;
+            opacity: .85;
+        }
+        /* Navigation */
+        nav {
+            margin: 20px auto;
+            width: 90%;
+            max-width: 900px;
+            padding: 12px;
+            text-align: center;
+            background: rgb(232, 232, 237);
+            border-radius: 30px;
+            box-shadow: 0 5px 20px #171718;
+        }
+        nav a {
+            color: #501986;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 9px 14px;
+            border-radius: 20px;
+        }
+        nav a:hover {
+            background: #eb7125;
+            color: white;
+        }
+        /* Main section */
+        .hero {
+            text-align: center;
+            padding: 25px;
+        }
+        .hero h2 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+        .hero span {
+            color: #2563eb;
+        }
+        .hero p {
+            color: #667085;
+        }
+        /* Service cards */
+        .services {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding: 15px 30px 40px;
+        }
+        .card {
+            width: 210px;
+            padding: 25px 18px;
+            text-align: center;
+            background: rgb(236, 230, 230);
+            border-radius: 22px;
+            box-shadow: 0 8px 25px #0a0a0a;
+            transition: .3s;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px #c7d0df;
+        }
+        .icon {
+            font-size: 40px;
+        }
+        .card h3 {
+            color: #2563eb;
+        }
+        .card:nth-child(even) {
+            background: #f8fbff;
+        }
+        /* Login section */
+        .accounts {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            padding: 40px 20px;
+            background: #eaf1ff;
+        }
+        form {
+            width: 280px;
+            padding: 25px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px #cbd5e1;
+        }
+        form h2 {
+            text-align: center;
+            margin-top: 0;
+            color: #172033;
+        }
+        input {
+            width: 100%;
+            padding: 11px;
+            margin: 7px 0;
+            border: 2px solid #e1e5eb;
+            border-radius: 9px;
+        }
+        input:focus {
+            outline: none;
+            border-color: #2563eb;
+            background: #f5f9ff;
+        }
+        input:required {
+            background: #fafcff;
+        }
+        input[type="email"]:valid {
+            border-color: green;
+        }
+        input[type="email"]:invalid {
+            border-color: #ff5555;
+        }
+        button {
+            width: 100%;
+            padding: 11px;
+            margin-top: 8px;
+            border: 0;
+            border-radius: 9px;
+            color: white;
+            background: #2563eb;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #111827;
+        }
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: white;
+            background: #111827;
+        }
+        @media(max-width:700px) {
+            nav a {
+                display: inline-block;
+                margin: 4px;
+            }
+            .accounts {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Freelancer Service Hub</h1>
+        <p>Connect • Work • Grow</p>
+    </header>
+    <!-- Navigation -->
+    <nav>
+        <a href="https://www.freelancer.in/">Home</a>
+        <a href="https://www.freelancermap.com/">Services</a>
+        <a href="https://www.upwork.com/freelance-jobs/">Freelancers</a>
+        <a href="https://en.wikipedia.org/wiki/Freelancer">About</a>
+        <a href="https://www.freelancer.in/contact">Contact</a>
+    </nav>
+    <!-- Hero -->
+    <section class="hero">
+        <h2>Find <span>Perfect Talent</span> For Your Project</h2>
+        <p>Hire skilled freelancers and turn your ideas into reality.</p>
+    </section>
+    <!-- Services -->
+    <section class="services">
+        <div class="card">
+            <div class="icon">💻</div>
+            <h3>Web Development</h3>
+            <p>Modern and responsive websites.</p>
+        </div>
+        <div class="card">
+            <div class="icon">🐍</div>
+            <h3>Python</h3>
+            <p>Powerful applications and automation.</p>
+        </div>
+        <div class="card">
+            <div class="icon">🎨</div>
+            <h3>Graphic Design</h3>
+            <p>Creative designs for your brand.</p>
+        </div>
+        <div class="card">
+            <div class="icon">✍️</div>
+            <h3>Content Writing</h3>
+            <p>Professional content for your business.</p>
+        </div>
+    </section>
+    <!-- Login and Signup -->
+    <section class="accounts">
+        <form>
+            <h2>Sign In</h2>
+            <input type="text" placeholder="Username" required>
+            <input type="password" placeholder="Password" required>
+            <button>Sign In</button>
+        </form>
+        <form>
+            <h2>Join Us</h2>
+            <input type="text" placeholder="Full Name" required>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <button>Sign Up</button>
+        </form>
+    </section>
+    <!-- Footer -->
+    <footer>
+        <b>Freelancer Service Hub</b><br>
+        © 2026 | (URK24CS1152) Online Freelance Service Platform
+    </footer>
+</body>
+</html>
