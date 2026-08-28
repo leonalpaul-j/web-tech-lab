@@ -1,0 +1,225 @@
+1.
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shortest and Longest Word - URK24CS1152</title>
+</head>
+<body>
+<h2>Find Shortest and Longest Word - URK24CS1152</h2>
+<button onclick="findWords()">Find</button>
+<p id="result"></p>
+<script>
+    function findWords() {
+        var str = "Web Development";
+        var words = str.split(" ");
+        var shortest = words[0];
+        var longest = words[0];
+
+        for (var i = 0; i < words.length; i++) {
+            if (words[i].length < shortest.length) {
+                shortest = words[i];
+            }
+
+            if (words[i].length > longest.length) {
+                longest = words[i];
+            }
+        }
+
+        document.getElementById("result").innerHTML =
+            "Shortest: " + shortest + "<br>" +
+            "Longest: " + longest;
+    }
+</script>
+</body>
+</html>
+
+2.
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BMI Calculator - URK24CS1152</title>
+</head>
+<body>
+<h2>BMI Calculator - URK24CS1152</h2>
+Weight (kg):
+<input type="text" id="weight">
+<br><br>
+Height (cm):
+<input type="text" id="height">
+<br><br>
+<button onclick="calculate()">Get BMI</button>
+<p>
+    The BMI is : <span id="score"></span>
+    <br>
+    The Body Type is : <span id="type"></span>
+</p>
+<script>
+    function calculate() {
+        var weight = parseFloat(document.getElementById("weight").value);
+        var height = parseFloat(document.getElementById("height").value);
+        height = height / 100;
+        var bmi = weight / (height * height);
+        document.getElementById("score").innerHTML = bmi.toFixed(2);
+        if (bmi < 18.5) {
+            document.getElementById("type").innerHTML = "Underweight";
+        }
+        else if (bmi < 25) {
+            document.getElementById("type").innerHTML = "Normal";
+        }
+        else if (bmi < 30) {
+            document.getElementById("type").innerHTML = "Overweight";
+        }
+        else {
+            document.getElementById("type").innerHTML = "Obese";
+        }
+    }
+</script>
+</body>
+</html>
+
+3.
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fruit Farm - URK24CS1152</title>
+</head>
+<body>
+<h2>Fruit Farm - URK24CS1152</h2>
+Rows: <input type="text" id="rows"><br><br>
+Columns: <input type="text" id="columns"><br><br>
+<button onclick="grow()">Plant Garden</button>
+<div id="garden"></div>
+<script>
+    function grow() {
+        let rows = parseInt(document.getElementById("rows").value);
+        let columns = parseInt(document.getElementById("columns").value);
+        let fruits = ["D:\\downloads\\apple.jpeg", "D:\\downloads\\orange.jpeg"];
+        let garden = "";
+        for (let i = 0; i < rows; i++) {
+            for (let j = 0; j < columns; j++) {
+                let random = Math.floor(Math.random() * 2);
+                garden += "<img src='" + fruits[random] +
+                          "' width='100' height='100'>";
+            }
+            garden += "<br>";
+        }
+        document.getElementById("garden").innerHTML = garden;
+    }
+</script>
+</body>
+</html>
+
+4.
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Currency Converter - URK24CS1152</title>
+</head>
+<body>
+<h2>Currency Converter - URK24CS1152</h2>
+<input type="text" id="data">
+<select id="from">
+    <option>Indian Rupee</option>
+    <option>US Dollar</option>
+</select>
+to
+<select id="to">
+    <option>US Dollar</option>
+    <option>Indian Rupee</option>
+</select>
+<button onclick="convert()">Calculate</button>
+<p>Answer: <span id="answer"></span></p>
+<script>
+function convert() {
+    let value = parseFloat(document.getElementById("data").value);
+    let from = document.getElementById("from").value;
+    let to = document.getElementById("to").value;
+    let result;
+    if (from == "Indian Rupee" && to == "US Dollar")
+        result = value * 0.015;
+    else if (from == "US Dollar" && to == "Indian Rupee")
+        result = value * 67.12;
+    else
+        result = value;
+    document.getElementById("answer").innerHTML =
+        result.toFixed(2);
+}
+</script>
+</body>
+</html>
+
+5.
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Heads or Tails - URK24CS1152</title>
+</head>
+<body>
+<h2>Heads or Tails - URK24CS1152</h2>
+<img src="D:\\downloads\\coin.jpeg" id="coin" width="150"><br><br>
+<button id="flip">Flip!</button>
+<p>
+    Heads Total: <span id="num_heads">0</span><br>
+    Tails Total: <span id="num_tails">0</span>
+</p>
+<script>
+let heads = 0;
+let tails = 0;
+document.getElementById("flip").addEventListener("click", flipFunction);
+function flipFunction() {
+    let random = Math.floor(Math.random() * 2);
+    if (random == 0) {
+        document.getElementById("coin").src = "D:\\downloads\\head.jpeg";
+        heads++;
+    }
+    else {
+        document.getElementById("coin").src = "D:\\downloads\\tail.jpeg";
+        tails++;
+    }
+    document.getElementById("num_heads").innerHTML = heads;
+    document.getElementById("num_tails").innerHTML = tails;
+}
+</script>
+</body>
+</html>
+
+6.
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Birthday Cake Order Form - URK24CS1152</title>
+</head>
+<body>
+<h2>Birthday Cake Order Form - URK24CS1152</h2>
+Number of 1kg Cakes:
+<input type="text" id="small"><br><br>
+Number of 2kg Cakes:
+<input type="text" id="medium"><br><br>
+Number of 3kg Cakes:
+<input type="text" id="large"><br><br>
+Tip:
+<input type="radio" name="tip" value="10"> 10%
+<input type="radio" name="tip" value="15"> 15%
+<input type="radio" name="tip" value="20"> 20%
+<br><br>
+<button id="submit">Calculate Order</button>
+<p>Cost of Order: Rs. <span id="price"></span></p>
+<script>
+document.getElementById("submit").addEventListener("click", calculate);
+function calculate() {
+    let small = parseInt(document.getElementById("small").value);
+    let medium = parseInt(document.getElementById("medium").value);
+    let large = parseInt(document.getElementById("large").value);
+    let tip = document.querySelector('input[name="tip"]:checked').value;
+    let cost = (small * 100) +
+               (medium * 200) +
+               (large * 400);
+    let tax = cost * 0.09;
+    let total = cost + tax;
+    total = total + (total * tip / 100);
+    document.getElementById("price").innerHTML =
+        total.toFixed(2);
+}
+</script>
+</body>
+</html>
