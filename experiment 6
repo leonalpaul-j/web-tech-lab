@@ -1,0 +1,194 @@
+1.
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Digital Clock - URK24CS1152</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial;
+            margin-top: 100px;
+        }
+        #clock {
+            font-size: 40px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<h1>Digital Clock - URK24CS1152</h1>
+<div id="clock"></div>
+<script>
+function display() {
+    var d = new Date();
+    var h = d.getHours();
+    var m = d.getMinutes();
+    var s = d.getSeconds();
+
+    document.getElementById("clock").innerHTML =
+        h + ":" + m + ":" + s;
+}
+display();
+setInterval(display, 1000);
+</script>
+</body>
+</html>
+
+2.
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Background - URK24CS1152</title>
+</head>
+<body>
+<h1>Dynamic Background Colour - URK24CS1152</h1>
+<p>The background colour changes every 5 seconds.</p>
+<script>
+function changeColor() {
+    var red = Math.floor(Math.random() * 256);
+    var green = Math.floor(Math.random() * 256);
+    var blue = Math.floor(Math.random() * 256);
+
+    var color = "rgb(" + red + "," + green + "," + blue + ")";
+    document.body.style.backgroundColor = color;
+}
+changeColor();
+setInterval(changeColor, 5000);
+</script>
+</body>
+</html>
+
+3.
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Change Font Size - URK24CS1152</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial;
+            margin-top: 100px;
+        }
+        #para1 {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<h1>Change Font Size - URK24CS1152</h1>
+<p id="para1"
+   onmouseover="incSize()"
+   onmouseout="decSize()">
+   Move the cursor over this paragraph.
+</p>
+<script>
+function incSize() {
+    document.getElementById("para1").style.fontSize = "30px";
+}
+function decSize() {
+    document.getElementById("para1").style.fontSize = "20px";
+}
+</script>
+</body>
+</html>
+
+4.
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Move Car - URK24CS1152</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial;
+        }
+        #car {
+            position: relative;
+            width: 550px;
+            margin-top: 150px;
+        }
+    </style>
+</head>
+<body>
+<h1>Move the Car - URK24CS1152</h1>
+<button onclick="moveCar()">Move</button>
+<button onclick="stopCar()">Stop</button>
+<br>
+<img id="car"
+     src="D:\downloads\car.jpeg"
+     alt="car">
+<script>
+var position = 0;
+var timer;
+function moveCar() {
+    timer = setInterval(function() {
+        position += 2;
+        document.getElementById("car").style.left = position + "px";
+    }, 20);
+}
+function stopCar() {
+    clearInterval(timer);
+}
+</script>
+</body>
+</html>
+
+5.
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Details - URK24CS1152</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+        }
+        .student {
+            margin: 15px auto;
+            padding: 10px;
+            width: 400px;
+            border: 10px solid rgb(251, 9, 9);
+        }
+    </style>
+</head>
+<body>
+<h1>Student Details - URK24CS1152</h1>
+<div id="students"></div>
+<script>
+var students = [
+    {
+        name: "John",
+        regno: "URK21CS1034",
+        dob: 1998
+    },
+    {
+        name: "gopi",
+        regno: "URK24CS1156",
+        dob: 2001
+    },
+    {
+        name: "femin",
+        regno: "URK23CS1131",
+        dob: 1997
+    }
+];
+for (var i = 0; i < students.length; i++) {
+    var student = students[i];
+    var category;
+    if (student.dob < 2000) {
+        category = "Born before 2000";
+    }
+    else {
+        category = "Born after 2000";
+    }
+    document.getElementById("students").innerHTML +=
+        "<div class='student'>" +
+        "<b>" + student.name + "</b>'s Register Number is " +
+        student.regno + "<br>" +
+        "Year of Birth: " + student.dob + "<br>" +
+        category +
+        "</div>";
+}
+</script>
+</body>
+</html>
