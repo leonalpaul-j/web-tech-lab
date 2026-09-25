@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery Lab Programs 1 - 6</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial;
+            background: #eef2ff;
+            text-align: center;
+            margin: 0;
+        }
+
+        section {
+            width: 700px;
+            margin: 30px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px #aaa;
+        }
+
+        h2 {
+            background: #111;
+            color: white;
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        input {
+            padding: 8px;
+            margin: 5px;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 9px 14px;
+            margin: 5px;
+            border: 0;
+            border-radius: 5px;
+            background: #2637d9;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #111b9c;
+        }
+
+        /* PROGRAM 1 */
+
+        #budgetResult div {
+            display: inline-block;
+            color: white;
+            padding: 12px;
+            margin: 12px 3px;
+        }
+
+        .rent {
+            background: blue;
+        }
+
+        .accessories {
+            background: green;
+        }
+
+        .emergency {
+            background: blue;
+        }
+
+        .saving {
+            background: #f08;
+        }
+
+        /* PROGRAM 2 */
+
+        .cakes {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .cake img {
+            width: 110px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .cake {
+            font-size: 12px;
+        }
+
+        #cakeTotal {
+            color: red;
+            font-size: 20px;
+        }
+
+        /* PROGRAM 3 */
+
+        #car {
+            width: 180px;
+            height: 45px;
+            background: #65a0ed;
+            margin: 70px auto;
+            position: relative;
+            border-radius: 8px;
+        }
+
+        #glass {
+            width: 75px;
+            height: 35px;
+            background: blue;
+            position: absolute;
+            left: 52px;
+            top: -35px;
+        }
+
+        .tyre {
+            width: 45px;
+            height: 45px;
+            background: #111;
+            border-radius: 50%;
+            position: absolute;
+            top: 35px;
+        }
+
+        .left {
+            left: 15px;
+        }
+
+        .right {
+            right: 15px;
+        }
+
+        /* PROGRAM 4 */
+
+        #product {
+            width: 350px;
+            margin: 25px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px #aaa;
+        }
+
+        #product h3 {
+            color: #2637d9;
+        }
+
+        #msg {
+            color: green;
+            font-weight: bold;
+        }
+
+        /* PROGRAM 5 */
+
+        table {
+            width: 100%;
+            margin-top: 15px;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 9px;
+            border: 1px solid #ccc;
+        }
+
+        th {
+            background: #2637d9;
+            color: white;
+        }
+
+        .selected {
+            background: #ffe477;
+        }
+
+        #status {
+            padding: 8px;
+            font-weight: bold;
+            color: green;
+        }
+
+        /* PROGRAM 6 */
+
+        .project {
+            padding: 15px;
+            background: #f8f8ff;
+            border-radius: 10px;
+        }
+
+        .team {
+            padding: 12px;
+            margin: 10px;
+            background: #e8edff;
+            border-radius: 8px;
+        }
+
+        .employee {
+            display: inline-block;
+            padding: 8px;
+            margin: 4px;
+            background: white;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+        }
+
+        .active {
+            background: #ffd54f !important;
+            border: 2px solid #ff9800;
+        }
+
+        #traverseResult {
+            color: #1769e0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     PROGRAM 1 : BUDGET CALCULATOR
+===================================================== -->
+
+<section>
+
+    <h2>1. Budget Calculator App</h2>
+
+    <b>Enter Amount</b><br>
+
+    <input id="amount" value="15000">
+
+    <p><b>Divide Your Money</b></p>
+
+    Rent %
+    <input id="rent" value="50">
+
+    Accessories %
+    <input id="acc" value="20">
+
+    Emergency %
+    <input id="emer" value="20">
+
+    Saving %
+    <input id="save" value="10">
+
+    <br>
+
+    <button id="calculate">
+        Evaluate My Money
+    </button>
+
+    <div id="budgetResult"></div>
+
+</section>
+
+
+<!-- =====================================================
+     PROGRAM 2 : CAKE SHOP
+===================================================== -->
+
+<section>
+
+    <h2 style="background:#d00000;">
+        2. CAKE SHOP
+    </h2>
+
+    <div class="cakes">
+
+        <div class="cake">
+            <img src="color-cake.jpg">
+            <br>Color Cake - Rs.300
+        </div>
+
+        <div class="cake">
+            <img src="brown-cake.jpg">
+            <br>Brown Cake - Rs.200
+        </div>
+
+        <div class="cake">
+            <img src="milky-cake.jpg">
+            <br>Milky Cake - Rs.250
+        </div>
+
+        <div class="cake">
+            <img src="black-forest.jpg">
+            <br>Black Forest - Rs.350
+        </div>
+
+    </div>
+
+    <h2 style="background:white;color:#1769e0;">
+        Order Cake
+    </h2>
+
+    <input id="c1" type="number" value="2"
+           placeholder="Color Cake">
+
+    <input id="c2" type="number" value="1"
+           placeholder="Brown Cake">
+
+    <input id="c3" type="number" value="2"
+           placeholder="Milky Cake">
+
+    <input id="c4" type="number" value="1"
+           placeholder="Black Forest">
+
+    <br>
+
+    <button id="order">
+        Place Order
+    </button>
+
+    <hr>
+
+    <b>Purchase Order Bill!!!</b>
+
+    <h3>
+        Total Price:
+        <span id="cakeTotal">Rs.0</span>
+    </h3>
+
+</section>
+
+
+<!-- =====================================================
+     PROGRAM 3 : CAR BODY WORKSHOP
+===================================================== -->
+
+<section>
+
+    <h2>3. Car Body Workshop</h2>
+
+    <div id="car">
+
+        <div id="glass"></div>
+
+        <div class="tyre left"></div>
+        <div class="tyre right"></div>
+
+    </div>
+
+    <button id="carColor">
+        Change Car Color
+    </button>
+
+    <button id="glassColor">
+        Change Glass Tint
+    </button>
+
+    <button id="increase">
+        Tyre Size Increase
+    </button>
+
+    <button id="decrease">
+        Tyre Size Decrease
+    </button>
+
+    <button id="carReset">
+        Reset
+    </button>
+
+</section>
+
+
+<!-- =====================================================
+     PROGRAM 4 : PRODUCT EFFECTS
+===================================================== -->
+
+<section>
+
+    <h2>4. Product Details</h2>
+
+    <div id="product">
+
+        <h3>Laptop Pro</h3>
+
+        <p>
+            <b>Price:</b> ₹65,000
+        </p>
+
+        <p>
+            <b>Category:</b> Electronics
+        </p>
+
+        <p>
+            <b>Stock Status:</b> Available
+        </p>
+
+        <p>
+            Powerful laptop for professional use.
+        </p>
+
+    </div>
+
+    <button id="show">
+        Show
+    </button>
+
+    <button id="hide">
+        Hide
+    </button>
+
+    <button id="fade">
+        Fade
+    </button>
+
+    <button id="slide">
+        Slide
+    </button>
+
+    <button id="animate">
+        Animate
+    </button>
+
+    <button id="stop">
+        Stop Animation
+    </button>
+
+    <button id="callback">
+        Callback
+    </button>
+
+    <button id="chain">
+        Chaining
+    </button>
+
+    <p id="msg"></p>
+
+</section>
+
+
+<!-- =====================================================
+     PROGRAM 5 : EMPLOYEE MANAGEMENT
+===================================================== -->
+
+<section>
+
+    <h2>5. Employee Management Dashboard</h2>
+
+    <input id="empId"
+           placeholder="Employee ID">
+
+    <input id="empName"
+           placeholder="Employee Name">
+
+    <input id="dept"
+           placeholder="Department">
+
+    <br>
+
+    <button id="add">
+        Add Employee
+    </button>
+
+    <button id="update">
+        Update
+    </button>
+
+    <button id="remove">
+        Remove
+    </button>
+
+    <button id="dimension">
+        Show Table Dimensions
+    </button>
+
+    <table id="employees">
+
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Action</th>
+        </tr>
+
+        <tr>
+            <td>101</td>
+            <td>Riya</td>
+            <td>HR</td>
+            <td>
+                <button class="select">
+                    Select
+                </button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>102</td>
+            <td>Arjun</td>
+            <td>IT</td>
+            <td>
+                <button class="select">
+                    Select
+                </button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>103</td>
+            <td>Meera</td>
+            <td>Finance</td>
+            <td>
+                <button class="select">
+                    Select
+                </button>
+            </td>
+        </tr>
+
+    </table>
+
+    <p id="status"></p>
+
+</section>
+
+
+<!-- =====================================================
+     PROGRAM 6 : JQUERY TRAVERSING
+===================================================== -->
+
+<section>
+
+    <h2>6. Employee Organization Explorer</h2>
+
+    <div class="project" id="project">
+
+        <h3>Project Alpha</h3>
+
+        <div class="team">
+
+            <h4>Development Team</h4>
+
+            <span class="employee">
+                Arun - Developer
+            </span>
+
+            <span class="employee senior" id="kavya">
+                Kavya - Senior Developer
+            </span>
+
+            <span class="employee">
+                Rahul - Developer
+            </span>
+
+        </div>
+
+        <div class="team">
+
+            <h4>Testing Team</h4>
+
+            <span class="employee">
+                Meena - Tester
+            </span>
+
+            <span class="employee senior">
+                Priya - Senior Tester
+            </span>
+
+            <span class="employee">
+                Karthik - Tester
+            </span>
+
+        </div>
+
+    </div>
+
+    <button id="select">
+        Select Employee
+    </button>
+
+    <button id="parent">
+        Show Parent Team
+    </button>
+
+    <button id="ancestor">
+        Show All Ancestors
+    </button>
+
+    <button id="projectBtn">
+        Show Project Employees
+    </button>
+
+    <button id="mates">
+        Show Teammates
+    </button>
+
+    <button id="senior">
+        Show Senior Employees
+    </button>
+
+    <button id="reset">
+        Reset
+    </button>
+
+    <p id="traverseResult"></p>
+
+</section>
+
+
+<!-- =====================================================
+     JQUERY
+===================================================== -->
+
+<script>
+
+$(document).ready(function () {
+
+
+    /* PROGRAM 1 : BUDGET */
+
+    $("#calculate").click(function () {
+
+        let amount = +$("#amount").val();
+
+        let r = +$("#rent").val();
+        let a = +$("#acc").val();
+        let e = +$("#emer").val();
+        let s = +$("#save").val();
+
+        if (r + a + e + s != 100) {
+            $("#budgetResult").html(
+                "<b style='color:red'>Percentage must be 100%</b>"
+            );
+            return;
+        }
+
+        $("#budgetResult").html(
+            "<div class='rent'>Room Rent<br>₹" +
+            amount * r / 100 + "</div>" +
+
+            "<div class='accessories'>Accessories<br>₹" +
+            amount * a / 100 + "</div>" +
+
+            "<div class='emergency'>Emergency<br>₹" +
+            amount * e / 100 + "</div>" +
+
+            "<div class='saving'>Saving<br>₹" +
+            amount * s / 100 + "</div>"
+        );
+
+    });
+
+
+    /* PROGRAM 2 : CAKE */
+
+    $("#order").click(function () {
+
+        let total =
+            $("#c1").val() * 300 +
+            $("#c2").val() * 200 +
+            $("#c3").val() * 250 +
+            $("#c4").val() * 350;
+
+        $("#cakeTotal").text("Rs." + total);
+
+    });
+
+
+    /* PROGRAM 3 : CAR */
+
+    $("#carColor").click(function () {
+
+        $("#car").css("background", "red");
+
+    });
+
+    $("#glassColor").click(function () {
+
+        $("#glass").css("background", "black");
+
+    });
+
+    $("#increase").click(function () {
+
+        $(".tyre").stop(true).animate({
+            width: "60px",
+            height: "60px"
+        }, 500);
+
+    });
+
+    $("#decrease").click(function () {
+
+        $(".tyre").stop(true).animate({
+            width: "35px",
+            height: "35px"
+        }, 500);
+
+    });
+
+    $("#carReset").click(function () {
+
+        $("#car").css("background", "#65a0ed");
+
+        $("#glass").css("background", "blue");
+
+        $(".tyre").stop(true).animate({
+            width: "45px",
+            height: "45px"
+        }, 300);
+
+    });
+
+
+    /* PROGRAM 4 : PRODUCT EFFECTS */
+
+    $("#show").click(function () {
+        $("#product").show();
+    });
+
+    $("#hide").click(function () {
+        $("#product").hide();
+    });
+
+    $("#fade").click(function () {
+        $("#product").fadeToggle(800);
+    });
+
+    $("#slide").click(function () {
+        $("#product").slideToggle(800);
+    });
+
+    $("#animate").click(function () {
+
+        $("#msg").text("");
+
+        $("#product")
+            .stop(true)
+            .animate({
+                width: "500px",
+                marginLeft: "250px"
+            }, 5000);
+
+    });
+
+    $("#stop").click(function () {
+
+        $("#product").stop(true);
+
+        $("#msg").text("Animation stopped!");
+
+    });
+
+    $("#callback").click(function () {
+
+        $("#msg").text("");
+
+        $("#product").fadeOut(1000, function () {
+
+            $("#msg").text(
+                "Animation completed successfully"
+            );
+
+            $("#product").fadeIn(1000);
+
+        });
+
+    });
+
+    $("#chain").click(function () {
+
+        $("#msg").text("");
+
+        $("#product")
+            .stop(true)
+            .slideUp(700)
+            .slideDown(700)
+            .fadeOut(700)
+            .fadeIn(700);
+
+    });
+
+
+    /* PROGRAM 5 : EMPLOYEE */
+
+    $("#employees").on("click", ".select", function () {
+
+        let row = $(this).closest("tr");
+
+        $(".selected").removeClass("selected");
+
+        row.addClass("selected");
+
+        $("#empId").val(row.children().eq(0).text());
+
+        $("#empName").val(row.children().eq(1).text());
+
+        $("#dept").val(row.children().eq(2).text());
+
+        $("#status")
+            .text("Selected employee details loaded.")
+            .css("background", "#d9ffd9");
+
+    });
+
+
+    $("#add").click(function () {
+
+        $("#employees").append(
+            "<tr>" +
+            "<td>" + $("#empId").val() + "</td>" +
+            "<td>" + $("#empName").val() + "</td>" +
+            "<td>" + $("#dept").val() + "</td>" +
+            "<td><button class='select'>Select</button></td>" +
+            "</tr>"
+        );
+
+        $("#status")
+            .text("Employee added successfully.")
+            .css("background", "#d9ffd9");
+
+    });
+
+
+    $("#update").click(function () {
+
+        let row = $(".selected");
+
+        row.children().eq(0).text(
+            $("#empId").val()
+        );
+
+        row.children().eq(1).text(
+            $("#empName").val()
+        );
+
+        row.children().eq(2).text(
+            $("#dept").val()
+        );
+
+        $("#status")
+            .text("Employee updated successfully.")
+            .css("background", "#fff0b3");
+
+    });
+
+
+    $("#remove").click(function () {
+
+        $(".selected").remove();
+
+        $("#status")
+            .text("Employee removed successfully.")
+            .css("background", "#ffd6d6");
+
+    });
+
+
+    $("#dimension").click(function () {
+
+        $("#status").text(
+            "Width: " +
+            $("#employees").width() +
+            "px | Height: " +
+            $("#employees").height() +
+            "px"
+        );
+
+    });
+
+
+    /* PROGRAM 6 : TRAVERSING */
+
+    $("#select").click(function () {
+
+        $(".active").removeClass("active");
+
+        $("#kavya").addClass("active");
+
+        $("#traverseResult").text(
+            "Selected Employee : Kavya"
+        );
+
+    });
+
+
+    $("#parent").click(function () {
+
+        $(".active").removeClass("active");
+
+        $("#kavya").parent().addClass("active");
+
+        $("#traverseResult").text(
+            "Parent Team : Development Team"
+        );
+
+    });
+
+
+    $("#ancestor").click(function () {
+
+        $(".active").removeClass("active");
+
+        $("#kavya").parents(".team")
+            .addClass("active");
+
+        $("#kavya").closest(".project")
+            .addClass("active");
+
+        $("#traverseResult").text(
+            "Project : Project Alpha"
+        );
+
+    });
+
+
+    $("#projectBtn").click(function () {
+
+        $(".active").removeClass("active");
+
+        $("#project")
+            .children(".team")
+            .addClass("active");
+
+        $("#project")
+            .find(".employee")
+            .addClass("active");
+
+        $("#traverseResult").text(
+            "All Project Employees Highlighted"
+        );
+
+    });
+
+
+    $("#mates").click(function () {
+
+        $(".active").removeClass("active");
+
+        $("#kavya")
+            .siblings(".employee")
+            .addClass("active");
+
+        $("#traverseResult").text(
+            "Teammates : Arun, Rahul"
+        );
+
+    });
+
+
+    $("#senior").click(function () {
+
+        $(".active").removeClass("active");
+
+        $(".employee")
+            .filter(".senior")
+            .addClass("active");
+
+        $("#traverseResult").text(
+            "Senior Employees Highlighted"
+        );
+
+    });
+
+
+    $("#reset").click(function () {
+
+        $(".active").removeClass("active");
+
+        $("#traverseResult").text("");
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
