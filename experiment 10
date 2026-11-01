@@ -1,0 +1,496 @@
+home.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tourism Registration</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3f");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #1e293b;
+            margin: 0;
+        }
+
+        header {
+            background: #075985;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px #0002;
+        }
+
+        h2 {
+            color: #075985;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 7px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 8px 0;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: normal;
+        }
+
+        .options input {
+            width: auto;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 13px;
+            background: #0284c7;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0369a1;
+        }
+
+        footer {
+            background: #075985;
+            text-align: center;
+            padding: 20px;
+            color: #f9fafb;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                margin: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Explore the World - URK24CS1154</h1>
+        <p>Your journey begins here!</p>
+    </header>
+
+    <div class="container">
+
+        <h2>Tourist Registration Form</h2>
+
+        <form action="/server" method="POST">
+
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name"
+                   required pattern="[A-Za-z ]{2,50}"
+                   title="Enter a name using letters and spaces">
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password"
+                   required minlength="6">
+
+            <label for="age">Age</label>
+            <input type="number" id="age" name="age"
+                   required min="1" max="120">
+
+            <label for="mobile">Mobile Number</label>
+            <input type="tel" id="mobile" name="mobile"
+                   required pattern="[0-9]{10}"
+                   title="Enter a 10-digit mobile number">
+
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+
+            <label>Gender</label>
+
+            <div class="options">
+                <label><input type="radio" name="gender" value="Male" required> Male</label>
+                <label><input type="radio" name="gender" value="Female"> Female</label>
+                <label><input type="radio" name="gender" value="Other"> Other</label>
+            </div>
+
+            <label for="state">State</label>
+
+            <select id="state" name="state" required>
+                <option value="">Select State</option>
+                <option>Tamil Nadu</option>
+                <option>Kerala</option>
+                <option>Karnataka</option>
+                <option>Andhra Pradesh</option>
+                <option>Telangana</option>
+                <option>Maharashtra</option>
+                <option>Goa</option>
+                <option>Delhi</option>
+            </select>
+
+            <label for="destination">Preferred Tourist Destination</label>
+
+            <select id="destination" name="destination" required>
+                <option value="">Select Destination</option>
+                <option>Ooty</option>
+                <option>Kodaikanal</option>
+                <option>Goa</option>
+                <option>Munnar</option>
+                <option>Manali</option>
+                <option>Jaipur</option>
+                <option>Agra</option>
+            </select>
+
+            <label>Travel Interests</label>
+
+            <div class="options">
+                <label><input type="checkbox" name="skills" value="Adventure"> Adventure</label>
+                <label><input type="checkbox" name="skills" value="Nature"> Nature</label>
+                <label><input type="checkbox" name="skills" value="Beaches"> Beaches</label>
+                <label><input type="checkbox" name="skills" value="Heritage"> Heritage</label>
+            </div>
+
+            <button type="submit">Register Now</button>
+
+        </form>
+    </div>
+
+    <footer>
+        © 2026 Explore the World - URK24CS1152 | Discover. Travel. Enjoy.
+    </footer>
+
+    <script>
+        const form = document.querySelector("form");
+        const interests = document.querySelectorAll('input[name="skills"]');
+
+        form.addEventListener("submit", function (event) {
+            if (![...interests].some(item => item.checked)) {
+                event.preventDefault();
+                alert("Please select at least one travel interest");
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+app.js
+
+
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+const { MongoClient } = require('mongodb');
+
+const url = 'mongodb://127.0.0.1:27017';
+const client = new MongoClient(url);
+
+function escapeHTML(value) {
+    return String(value ?? '').replace(/[&<>"']/g, char => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+    })[char]);
+}
+
+async function startServer() {
+    await client.connect();
+
+    const db = client.db('tourismDB');
+    const tourists = db.collection('tourists');
+
+    const server = http.createServer(async (req, res) => {
+        try {
+
+            if (req.method === 'GET' && req.url === '/') {
+
+                res.writeHead(200, {
+                    'Content-Type': 'text/html; charset=utf-8'
+                });
+
+                fs.createReadStream(
+                    path.join(__dirname, 'home.html')
+                ).pipe(res);
+
+            } else if (req.method === 'POST' && req.url === '/server') {
+
+                let rawData = '';
+
+                req.on('data', chunk => {
+                    rawData += chunk;
+                });
+
+                req.on('end', async () => {
+
+                    try {
+                        const formData = new URLSearchParams(rawData);
+
+                        const name = formData.get('name') || '';
+                        const password = formData.get('password') || '';
+                        const age = Number(formData.get('age'));
+                        const mobile = formData.get('mobile') || '';
+                        const email = formData.get('email') || '';
+                        const gender = formData.get('gender') || '';
+                        const state = formData.get('state') || '';
+                        const destination = formData.get('destination') || '';
+                        const skills = formData.getAll('skills');
+
+                        if (
+                            !name.trim() ||
+                            password.length < 6 ||
+                            !Number.isInteger(age) ||
+                            age < 1 || age > 120 ||
+                            !/^[0-9]{10}$/.test(mobile) ||
+                            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
+                            !gender || !state || !destination ||
+                            skills.length === 0
+                        ) {
+                            res.writeHead(400, {
+                                'Content-Type': 'text/html; charset=utf-8'
+                            });
+
+                            return res.end(
+                                '<h2>Invalid details. Please go back and complete the form correctly.</h2>'
+                            );
+                        }
+
+                        const tourist = {
+                            name: name.trim(),
+                            password: password,
+                            age,
+                            mobile,
+                            email,
+                            gender,
+                            state,
+                            destination,
+                            skills,
+                            registeredAt: new Date()
+                        };
+
+                        const result = await tourists.insertOne(tourist);
+
+                        const savedTourist = await tourists.findOne({
+                            _id: result.insertedId
+                        });
+
+                        const rows = [
+                            ['Name', savedTourist.name],
+                            ['Password', '******'],
+                            ['Age', savedTourist.age],
+                            ['Mobile Number', savedTourist.mobile],
+                            ['Email', savedTourist.email],
+                            ['Gender', savedTourist.gender],
+                            ['State', savedTourist.state],
+                            ['Destination', savedTourist.destination],
+                            ['Travel Interests', savedTourist.skills.join(', ')],
+                            ['Registration Date', savedTourist.registeredAt.toLocaleString()]
+                        ];
+
+                        const tableRows = rows.map(([key, value]) => `
+                            <tr>
+                                <th>${escapeHTML(key)}</th>
+                                <td>${escapeHTML(value)}</td>
+                            </tr>
+                        `).join('');
+
+                        res.writeHead(200, {
+                            'Content-Type': 'text/html; charset=utf-8'
+                        });
+
+                        res.end(`
+                            <!DOCTYPE html>
+                            <html lang="en">
+
+                            <head>
+                                <meta charset="UTF-8">
+                                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                <title>Registration Successful</title>
+
+                                <style>
+                                    body {
+                                        font-family: Arial, sans-serif;
+                                        background: linear-gradient(135deg, #dff6f0, #dbeafe);
+                                        padding: 25px;
+                                        color: #1e293b;
+                                    }
+
+                                    .container {
+                                        max-width: 750px;
+                                        margin: 30px auto;
+                                        background: white;
+                                        padding: 25px;
+                                        border-radius: 15px;
+                                        box-shadow: 0 5px 20px #0002;
+                                    }
+
+                                    h1, p {
+                                        text-align: center;
+                                    }
+
+                                    h1 {
+                                        color: #075985;
+                                    }
+
+                                    table {
+                                        width: 100%;
+                                        border-collapse: collapse;
+                                        margin-top: 20px;
+                                    }
+
+                                    th, td {
+                                        border: 1px solid #cbd5e1;
+                                        padding: 12px;
+                                        text-align: left;
+                                        overflow-wrap: anywhere;
+                                    }
+
+                                    th {
+                                        background: #075985;
+                                        color: white;
+                                        width: 40%;
+                                    }
+
+                                    tr:nth-child(even) {
+                                        background: #f1f5f9;
+                                    }
+
+                                    a {
+                                        display: block;
+                                        text-align: center;
+                                        color: #075985;
+                                        margin-top: 20px;
+                                    }
+                                </style>
+                            </head>
+
+                            <body>
+                                <div class="container">
+
+                                    <h1>Registration Successful!</h1>
+
+                                    <p>
+                                        Thank you for registering with Explore the World.
+                                    </p>
+
+                                    <table>
+                                        <tr>
+                                            <th>Field</th>
+                                            <th>Value</th>
+                                        </tr>
+
+                                        ${tableRows}
+
+                                    </table>
+
+                                    <a href="/">Register Another Tourist</a>
+
+                                </div>
+                            </body>
+                            </html>
+                        `);
+
+                    } catch (error) {
+
+                        console.error(error);
+
+                        if (!res.headersSent) {
+                            res.writeHead(500, {
+                                'Content-Type': 'text/plain'
+                            });
+
+                            res.end('Unable to process registration.');
+                        }
+                    }
+                });
+
+            } else {
+
+                res.writeHead(404, {
+                    'Content-Type': 'text/plain'
+                });
+
+                res.end('Page not found');
+            }
+
+        } catch (error) {
+
+            console.error(error);
+
+            if (!res.headersSent) {
+                res.writeHead(500, {
+                    'Content-Type': 'text/plain'
+                });
+
+                res.end('Server error');
+            }
+        }
+    });
+
+    server.listen(7000, () => {
+        console.log('Server running at http://localhost:7000');
+    });
+}
+
+startServer().catch(error => {
+    console.error('Unable to start server:', error);
+});
+
+
+package.json
+
+
+{
+  "name": "tourism-app",
+  "version": "1.0.0",
+  "description": "Tourism Registration using Node.js and MongoDB",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "mongodb": "6.0"
+  }
+}
+
+
