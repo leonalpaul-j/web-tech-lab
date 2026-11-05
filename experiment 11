@@ -1,0 +1,241 @@
+app.jsx
+
+const express = require("express");
+const mongoose = require("mongoose");
+
+const app = express();
+app.use(express.json());
+
+// Connect Node.js with MongoDB
+mongoose
+  .connect("mongodb://127.0.0.1:27017/studentdb")
+  .then(() => console.log("MongoDB Connected Successfully"))
+  .catch((error) => console.log("Database Connection Error:", error));
+
+// Student Schema
+const studentSchema = new mongoose.Schema({
+  regNo: { type: String, required: true },
+  name: { type: String, required: true },
+  department: { type: String, required: true },
+  email: { type: String },
+  cgpa: { type: Number }
+});
+
+// Student Model
+const Student = mongoose.model("Student", studentSchema);
+
+// Home route
+app.get("/", (req, res) => {
+  res.send("NodeJS MongoDB Application is Running");
+});
+
+// CREATE - Insert a student
+app.post("/students", async (req, res) => {
+  try {
+    const student = new Student(req.body);
+    const savedStudent = await student.save();
+    res.status(201).json(savedStudent);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// READ - Display all students
+app.get("/students", async (req, res) => {
+  try {
+    const students = await Student.find();
+    res.json(students);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// READ - Find one student using register number
+app.get("/students/:regNo", async (req, res) => {
+  try {
+    const student = await Student.findOne({ regNo: req.params.regNo });
+
+    if (!student) {
+      return res.status(404).json({ message: "Student not found" });
+    }
+
+    res.json(student);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// UPDATE - Modify student details
+app.put("/students/:regNo", async (req, res) => {
+  try {
+    const updatedStudent = await Student.findOneAndUpdate(
+      { regNo: req.params.regNo },
+      req.body,
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedStudent) {
+      return res.status(404).json({ message: "Student not found" });
+    }
+
+    res.json(updatedStudent);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// DELETE - Remove a student
+app.delete("/students/:regNo", async (req, res) => {
+  try {
+    const deletedStudent = await Student.findOneAndDelete({
+      regNo: req.params.regNo
+    });
+
+    if (!deletedStudent) {
+      return res.status(404).json({ message: "Student not found" });
+    }
+
+    res.json({ message: "Student deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Start server
+app.listen(3000, () => {
+  console.log("Server running at http://localhost:3000");
+});
+
+json
+
+{
+  "info": {
+    "name": "Experiment 11 - NodeJS MongoDB CRUD",
+    "description": "Requests for the Student CRUD API in Experiment 11.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1 - CREATE student",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"regNo\": \"URK23CS1001\",\n  \"name\": \"Arun Kumar\",\n  \"department\": \"Computer Science and Engineering\",\n  \"email\": \"arun@gmail.com\",\n  \"cgpa\": 8.5\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/students",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "students"
+          ]
+        }
+      }
+    },
+    {
+      "name": "2 - READ all students",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/students",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "students"
+          ]
+        }
+      }
+    },
+    {
+      "name": "3 - READ one student",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/students/URK23CS1001",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "students",
+            "URK23CS1001"
+          ]
+        }
+      }
+    },
+    {
+      "name": "4 - UPDATE student",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Arun Kumar\",\n  \"department\": \"CSE\",\n  \"email\": \"arun.kumar@gmail.com\",\n  \"cgpa\": 9.0\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/students/URK23CS1001",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "students",
+            "URK23CS1001"
+          ]
+        }
+      }
+    },
+    {
+      "name": "5 - DELETE student",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/students/URK23CS1001",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "students",
+            "URK23CS1001"
+          ]
+        }
+      }
+    }
+  ]
+}
+
