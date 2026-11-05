@@ -1,0 +1,337 @@
+1. App.jsx
+
+import React, { useState } from "react";
+import "./App.css";
+
+function App() {
+    const [search, setSearch] = useState("");
+    const [category, setCategory] = useState("All");
+
+    const products = [
+        {
+            id: 1,
+            name: "Dell Latitude Laptop",
+            category: "Laptops",
+            price: 25000,
+            condition: "Second Hand",
+            seller: "Tech Solutions"
+        },
+        {
+            id: 2,
+            name: "HP Desktop Computer",
+            category: "Computers",
+            price: 18000,
+            condition: "First Hand",
+            seller: "Digital World"
+        },
+        {
+            id: 3,
+            name: "Samsung Monitor",
+            category: "Accessories",
+            price: 7500,
+            condition: "Second Hand",
+            seller: "Smart Electronics"
+        },
+        {
+            id: 4,
+            name: "Intel Processor",
+            category: "Components",
+            price: 12000,
+            condition: "Third Hand",
+            seller: "Computer Hub"
+        }
+    ];
+
+    const filteredProducts = products.filter((product) => {
+        const matchesSearch = product.name
+            .toLowerCase()
+            .includes(search.toLowerCase());
+
+        const matchesCategory =
+            category === "All" || product.category === category;
+
+        return matchesSearch && matchesCategory;
+    });
+
+    return (
+        <div>
+            <nav className="navbar">
+                <h2>ReMarket</h2>
+                <div>
+                    <a href="#home">Home</a>
+                    <a href="#products">Products</a>
+                    <a href="#about">About</a>
+                    <button className="login-btn">Login</button>
+                </div>
+            </nav>
+
+            <section className="hero" id="home">
+                <h1>Buy & Sell Electronics</h1>
+                <p>
+                    A trusted marketplace for new and used
+                    electronic products.
+                </p>
+                <a href="#products" className="hero-btn">
+                    Explore Products
+                </a>
+            </section>
+
+            <section className="products" id="products">
+                <h2>Available Products</h2>
+
+                <input
+                    type="text"
+                    placeholder="Search products..."
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                />
+
+                <select
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                >
+                    <option value="All">All Categories</option>
+                    <option value="Laptops">Laptops</option>
+                    <option value="Computers">Computers</option>
+                    <option value="Accessories">Accessories</option>
+                    <option value="Components">Components</option>
+                </select>
+
+                <div className="product-grid">
+                    {filteredProducts.map((product) => (
+                        <div className="product-card" key={product.id}>
+                            <div className="product-image">💻</div>
+
+                            <h3>{product.name}</h3>
+                            <p>Category: {product.category}</p>
+                            <p>Condition: {product.condition}</p>
+                            <h3>₹{product.price.toLocaleString("en-IN")}</h3>
+                            <small>Seller: {product.seller}</small>
+
+                            <button onClick={() =>
+                                alert("Contact seller: " + product.seller)
+                            }>
+                                Contact Seller
+                            </button>
+                        </div>
+                    ))}
+                </div>
+
+                {filteredProducts.length === 0 && (
+                    <p className="empty">No products found.</p>
+                )}
+            </section>
+
+            <section className="about" id="about">
+                <h2>About ReMarket</h2>
+                <p>
+                    ReMarket connects buyers and suppliers through
+                    a simple electronics marketplace. Users can
+                    discover products and contact sellers directly.
+                </p>
+            </section>
+
+            <footer>
+                <p>© 2026 ReMarket. All Rights Reserved.</p>
+            </footer>
+        </div>
+    );
+}
+
+export default App;
+
+2. App.css
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f8fc;
+    color: #102a43;
+}
+
+.navbar {
+    background: #102a43;
+    color: white;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar h2 {
+    color: #20c6b1;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 12px;
+}
+
+.login-btn,
+.product-card button {
+    background: #20b8a6;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.hero {
+    background: #102a43;
+    color: white;
+    text-align: center;
+    padding: 90px 20px;
+}
+
+.hero h1 {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    margin-bottom: 25px;
+    color: #c2d4e3;
+}
+
+.hero-btn {
+    display: inline-block;
+    background: #20b8a6;
+    color: #102a43;
+    padding: 12px 25px;
+    border-radius: 7px;
+    text-decoration: none;
+}
+
+.products {
+    padding: 55px 7%;
+    text-align: center;
+}
+
+.products h2,
+.about h2 {
+    margin-bottom: 25px;
+}
+
+.products input,
+.products select {
+    padding: 12px;
+    margin: 8px;
+    border: 1px solid #ccd6df;
+    border-radius: 6px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+    margin-top: 30px;
+}
+
+.product-card {
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    border: 1px solid #e1e9ef;
+    text-align: left;
+    box-shadow: 0 5px 15px #102a430d;
+}
+
+.product-image {
+    background: #e1f7f3;
+    padding: 25px;
+    text-align: center;
+    font-size: 45px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.product-card h3 {
+    margin: 10px 0;
+}
+
+.product-card p {
+    color: #718497;
+    margin: 7px 0;
+}
+
+.product-card small {
+    display: block;
+    margin: 10px 0;
+}
+
+.product-card button {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.product-card button:hover,
+.login-btn:hover,
+.hero-btn:hover {
+    background: #45d8c6;
+}
+
+.empty {
+    margin-top: 25px;
+}
+
+.about {
+    background: #e1f7f3;
+    padding: 50px 10%;
+    text-align: center;
+    line-height: 1.8;
+}
+
+footer {
+    background: #102a43;
+    color: white;
+    text-align: center;
+    padding: 22px;
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .navbar a {
+        margin: 0 5px;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .products {
+        padding: 35px 5%;
+    }
+}
+
+3. package.json
+
+{
+    "name": "remarket",
+    "private": true,
+    "version": "1.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-react": "^4.3.4",
+        "vite": "^6.4.5"
+    }
+}
